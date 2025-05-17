@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="web電卓兼時計">
+    <title>電卓</title>
+</head>
+<body>
+<div> <!--これは電卓の始まりです--> 
+<h1>電卓</h1>
+<div>
+    <input type="text" id="ni">
+    <select id="yon">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select>
+    <input type="text" id="san">
+    <span>=</span>
+    <span id="iti">結果</span>
+    <span id = "amari"></span>
+</div>
+    <button id="calculate">計算</button>
+    <br>
+    <button id="copy">計算結果をコピー</button>
+    <script>
+    document.getElementById("calculate").addEventListener("click", () => {
+        const yon = document.getElementById("yon").value;
+        const ni = Number(document.getElementById("ni").value);
+        const san = Number(document.getElementById("san").value);
+        const iti = document.getElementById("iti");
+        const amari = document.getElementById("amari");
+
+        if (isNaN(ni) || isNaN(san)) {
+            iti.textContent = "数値を入力してください";
+            return;
+        }
+        amari.textContent = ""
+        switch (yon) {
+            case '+':
+                iti.textContent = ni + san;
+                break;
+            case '-':
+                iti.textContent = ni - san;
+                break;
+            case '*':
+                iti.textContent = ni * san;
+                break;
+            case '/':
+                iti.textContent = san !== 0 ? ni / san : "0で割れません";
+                (ni % san) === 0 ? amari.textContent = "" : amari.textContent = ` 余りは${ni % san}です`;
+                break;
+        }
+    });
+    document.getElementById("copy").addEventListener("click",() => {
+       ( 
+       function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+
+    }).catch(err => {
+    alert("コピーできませんでした")
+    })}) (iti.textContent)
+
+})
+</script>
+</div><!--これは電卓の終わりです--> 
+<br>
+    <div><!--これは時計の始まりです-->
+        <h1>時計</h1>
+        <h4>通常表記</h4>
+        <div><span id = "Hou">n</span><span>時</span><span id = "Min">n</span><span>分</span><span id = "Sec">n</span><span>秒です</span></div>
+        <h4>AM/PM表記</h4>
+        <div><span id = "AMorPM">NULL</span><span>  </span><span id = "HouTwo">n</span><span>時</span><span id = "MinTwo">n</span><span>分</span><span id = "SecTwo">n</span><span>秒です</span></div>
+    <script>
+function settime () {
+let nowTime = new Date();
+let nowHour = nowTime.getHours();
+let nowMin  = nowTime.getMinutes();
+let nowSec  = nowTime.getSeconds();
+document.getElementById("Hou").textContent = nowHour
+document.getElementById("Min").textContent = nowMin
+document.getElementById("Sec").textContent = nowSec
+nowHour % 12 == nowHour ? document.getElementById("AMorPM").textContent = "AM" : document.getElementById("AMorPM").textContent = "PM";
+document.getElementById("HouTwo").textContent = (nowHour % 12)
+document.getElementById("MinTwo").textContent = (nowMin)
+document.getElementById("SecTwo").textContent = (nowSec)
+
+
+requestAnimationFrame(settime)
+}
+settime();
+</script>
+    </div><!--これは時計の終わりです-->
+
+    <br>
+    <a href=""></a>
+</body>
+</html>
