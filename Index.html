@@ -28,12 +28,13 @@
     <script>
     document.getElementById("calculate").addEventListener("click", () => {
         const yon = document.getElementById("yon").value;
-        const ni = Number(document.getElementById("ni").value);
-        const san = Number(document.getElementById("san").value);
+        let ni =  document.getElementById("ni");
+        let san = document.getElementById("san");
         const iti = document.getElementById("iti");
         const amari = document.getElementById("amari");
-        typeof(ni) === "number" ?  ni.style.borderColor = "white" : ni.style.borderColor = "red"; ;
-        typeof(san) === "number" ?  san.style.borderColor = "white" : san.style.borderColor = "red"; ;
+    ni.style.borderColor = (isNaN(ni.value) ? "red" : "white")
+    san.style.borderColor = (isNaN(san.value) ? "red" : "white")
+    san = Number(document.getElementById("san").value);
         amari.textContent = ""
         switch (yon) {
             case '+':
