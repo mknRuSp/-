@@ -34,10 +34,6 @@
         const amari = document.getElementById("amari");
         typeof(ni) === "number" ?  ni.style.borderColor = "white" : ni.style.borderColor = "red"; ;
         typeof(san) === "number" ?  san.style.borderColor = "white" : san.style.borderColor = "red"; ;
-        if (isNaN(ni) || isNaN(san)) {
-            iti.textContent = "数値を入力してください";
-            return;
-        }
         amari.textContent = ""
         switch (yon) {
             case '+':
@@ -53,6 +49,9 @@
                 iti.textContent = san !== 0 ? ni / san : "0で割れません";
                 (ni % san) === 0 && (!isNaN(ni/san)) ? amari.textContent = "" : amari.textContent = ` 余りは${ni % san}です`;
                 break;
+        }
+                if (isNaN(ni) || isNaN(san)) {
+            iti.textContent = "数値を入力してください";
         }
     });
     document.getElementById("copy").addEventListener("click",() => {
